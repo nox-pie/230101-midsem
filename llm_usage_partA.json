@@ -1,0 +1,167 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part A",
+    "submission_date": "2026-03-01"
+  },
+
+  "selected_paper": {
+    "title": "Finding Deceptive Opinion Spam by Any Stretch of the Imagination",
+    "authors": [
+      "Myle Ott",
+      "Yejin Choi",
+      "Claire Cardie",
+      "Jeffrey T. Hancock"
+    ],
+    "year": 2011,
+    "venue": "Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics (ACL 2011)",
+    "venue_core_rank": "A*",
+    "official_link": "https://aclanthology.org/P11-1032/",
+    "pdf_link": "https://aclanthology.org/P11-1032.pdf",
+    "primary_method": "Support Vector Machine (SVM)",
+    "dataset_link": "https://myleott.com/op_spam_v1.4.zip"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    },
+    {
+      "tool_name": "Gemini",
+      "model": "Gemini 3.1 Pro",
+      "provider": "Google"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-01",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "purpose": "Understanding the requirements of Part A and what kind of paper to select",
+      "prompt": "here is the attached PDF of a open exam for my mid semester exam in Advance Machine learning subject of 6th semester, I want your help to complete this open exam. First analyse the attached PDF thoroughly word by word then explain all the instructions and procedure to complete this exam",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Gave a complete breakdown of all Part A requirements including venue constraints, year range, method alignment, reproducibility criteria, JSON structure, and GitHub submission rules. This helped me understand the full scope of what I needed to do before selecting any paper.",
+      "student_verification": "I cross-checked every requirement against the original PDF myself and confirmed the breakdown was accurate. I also re-read the evaluation rubric table to verify the marks allocation.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-01",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "purpose": "Checking the live response sheet to understand what papers are already taken by classmates",
+      "prompt": "here is the excel sheets of current student paper selection and its details",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude analyzed the 12 already-taken papers and identified which venues, methods, and topics were already claimed. This prevented me from wasting time on papers I could not select due to the uniqueness constraint.",
+      "student_verification": "I personally opened the live Google Sheets response sheet and confirmed the list of 12 taken papers matched what Claude read from the uploaded file.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-01",
+      "tool_name": "Gemini",
+      "model": "Gemini 3.1 Pro",
+      "purpose": "Evaluating the validity of a sarcasm detection paper.",
+      "prompt": "I want you to analyse the qualification of the paper i have selected according to the requirements mentioned in the Mid Sem Exam requirement PDF, here is the paper details i have choosen:- Title:- Identifying Sarcasm in Twitter: A Closer Look Paper Link:- https://aclanthology.org/P11-2102.pdf",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed the paper met the SVM and ACL venue requirements, but highlighted potential issues with finding the exact original Twitter dataset.",
+      "student_verification": "Understood that while valid, older Twitter datasets are prone to link rot, making replication slightly more risky.",
+      "confidence_level": 4
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-01",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "purpose": "Investigating whether the sarcasm Twitter paper (ACL 2011) has its original dataset available",
+      "prompt": "the dataset used in this paper is available right? where is the link",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude honestly disclosed that the original Twitter sarcasm dataset from Gonzalez-Ibanez et al. 2011 was never publicly released by the authors. This was critical information that led me to switch to a paper with a guaranteed publicly available dataset.",
+      "student_verification": "I searched independently for the dataset using Google and confirmed that no official download link exists for the original 2011 sarcasm Twitter corpus. This matched Claude's disclosure exactly.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 5,
+      "date": "2026-03-01",
+      "tool_name": "Gemini",
+      "model": "Gemini 3.1 Pro",
+      "purpose": "Evaluating a highly cited sentiment analysis paper.",
+      "prompt": "okay i have changed the paper after reviewing the dataset issue. now review this paper if it is fulfilling the requirements mentioned in Exam PDF. Here are the details of new research paper:- Paper Name:- Learning Word Vectors for Sentiment Analysis Paper PDF link:- https://aclanthology.org/P11-1015.pdf",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Prevented me from selecting an invalid paper. The LLM clarified that learning word embeddings does not align with the strict classical ML (ARIMA/GMM/SVM) constraint.",
+      "student_verification": "Checked the paper's methodology and confirmed its primary contribution was representation learning, not classical SVMs, validating the AI's warning.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 6,
+      "date": "2026-03-01",
+      "tool_name": "Gemini",
+      "model": "Gemini 3.1 Pro",
+      "purpose": "Evaluating the deceptive opinion spam paper.",
+      "prompt": "okay i have again changed the paper after reviewing the previous Experimental scope issue. now review this paper if it is fulfilling the requirements mentioned in Exam PDF. Here are the details of new research paper:- Paper Name:- Finding Deceptive Opinion Spam by Any Stretch of the Imagination Paper PDF link:- https://aclanthology.org/P11-1032.pdf",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Confirmed that the paper meets all criteria: ACL 2011, SVM methodology, accessible dataset, and CPU-feasible compute.",
+      "student_verification": "Verified the dataset availability online and confirmed the methodology relies on extractable text features and linear SVMs.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 7,
+      "date": "2026-03-01",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "purpose": "Confirming that the Learning Word Vectors paper is NOT a safe choice because SVM is not its primary contribution",
+      "prompt": "but for this paper Learning Word Vectors for Sentiment Analysis If i submit this paper, i risk losing the 4 marks for Method Alignment, or worse, facing disqualification from Parts B and C because this paper core topic (word embeddings) is outside the classical ML scope assigned by your professor",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude agreed and confirmed the risk. The word vectors paper primary contribution is embeddings not SVM. This interaction prevented a potentially disqualifying paper selection and reinforced why Ott et al. 2011 is safer since SVM is genuinely the primary classification method throughout.",
+      "student_verification": "I read the abstract of the Maas et al. 2011 paper on ACL Anthology and confirmed the primary contribution is described as learning word vectors for sentiment, with SVM used only as an evaluation tool. This confirmed my concern was valid.",
+      "confidence_level": 5
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 6,
+      "prompt": "okay i have again changed the paper after reviewing the previous Experimental scope issue. now review this paper if it is fulfilling the requirements mentioned in Exam PDF. Here are the details of new research paper:- Paper Name:- Finding Deceptive Opinion Spam by Any Stretch of the Imagination Paper PDF link:- https://aclanthology.org/P11-1032.pdf",
+      "why_important": "This was the single most impactful prompt because it led directly to the validation of my final paper choice. By having the AI review it against all constraints, I confirmed that Ott et al. 2011 satisfies every single exam requirement including the SVM methodology and dataset availability."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 4,
+      "prompt": "the dataset used in this paper is available right? where is the link",
+      "why_important": "This prompt revealed the critical dataset availability problem with earlier paper choices. Understanding that the original dataset for the Twitter sarcasm paper was never publicly released taught me to prioritize dataset feasibility (worth 5 marks) before committing to a paper."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 7,
+      "prompt": "but for this paper Learning Word Vectors for Sentiment Analysis If i submit this paper, i risk losing the 4 marks for Method Alignment, or worse, facing disqualification from Parts B and C because this paper core topic (word embeddings) is outside the classical ML scope assigned by your professor",
+      "why_important": "This prompt protected my method alignment marks. It forced a critical evaluation of what counts as a 'primary contribution' versus a secondary evaluation tool, preventing me from selecting a famous but disqualifying representation-learning paper."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt": "here is the excel sheets of current student paper selection and its details",
+      "why_important": "This prompt was critical for navigating the strict first-come, first-select rule. Analyzing the live response sheet ensured my paper was highly unique and prevented automatic disqualification from duplicate selections."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 1,
+      "prompt": "here is the attached PDF of a open exam for my mid semester exam in Advance Machine learning subject of 6th semester, I want your help to complete this open exam. First analyse the attached PDF thoroughly word by word then explain all the instructions and procedure to complete this exam",
+      "why_important": "Established the foundational rules, strict constraints (like the 2009-2012 year range and A* venue rank), and the absolute necessity of the JSON disclosure process, giving me a strategic roadmap for Part A."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Part A. I used Claude (Anthropic) and Gemini (Google) to assist with paper selection, feasibility verification, dataset availability checking, and venue ranking confirmation. All final decisions, verifications, and understanding are my own. I am fully prepared to explain this paper independently in Part C without any tools.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-01"
+  }
+}
