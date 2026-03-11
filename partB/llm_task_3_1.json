@@ -1,0 +1,105 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 3.1",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Remove two distinct components one at a time and interpret the performance change",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-09",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 3.1",
+      "purpose": "Deciding which two components to ablate from the BIGRAMS+_SVM pipeline",
+      "prompt": "Which two components of BIGRAMS+_SVM from Ott et al. 2011 would make the most informative ablations? I want each ablation to isolate a specific design choice from the paper, not just tune hyperparameters.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Claude suggested: bigrams (ngram_range), IDF weighting, L2 normalisation, and sublinear TF. I chose bigrams and IDF weighting as the two ablations because they are the most directly grounded in specific paper sections (4.3 and 4.4 respectively) and correspond to conscious design choices the authors made.",
+      "student_verification": "I confirmed both choices independently: the paper explicitly compares UNIGRAMS vs BIGRAMS+ (Table 3), validating bigrams as a meaningful ablation. The paper explicitly specifies TF-IDF with unit-length normalisation (Section 4.4), validating IDF as a second meaningful ablation. L2 normalisation was excluded because it is less interpretable in isolation.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 decision-making only. The choice of which components to ablate was my own.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-09",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 3.1 Component 1",
+      "purpose": "Writing the Ablation 1 notebook section \u2014 bigrams removed, code + visualisation + interpretation",
+      "prompt": "Write Ablation 1 for my task_3_1.ipynb: remove bigrams by setting ngram_range=(1,1). Include: markdown naming the component and its role (2-3 sentences citing Section 4.3), code running both full and ablated CV, 2-panel figure saved to results/task_3_1_ablation1_bigrams.png, 5-7 sentence interpretation paragraph.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced the full Ablation 1 section including the component role description (citing Section 4.3 and Table 3), the run_cv helper function, the 2-panel visualisation code, and the interpretation paragraph.",
+      "student_verification": "I ran the code and confirmed the 2 pp drop (97.95% \u2192 95.95%). I verified the per-fold numbers match. I reviewed the interpretation paragraph and extended it by adding the observation that the drop size is consistent with the paper's own Table 3 comparison (BIGRAMS+ 89.6% vs UNIGRAMS 88.4% = 1.2 pp gap).",
+      "code_used_verbatim": true,
+      "student_modification": "Extended the interpretation paragraph to explicitly reference the paper's own Table 3 BIGRAMS+ vs UNIGRAMS comparison (1.2 pp in paper vs 2.0 pp in our reproduction), explaining why our gap is slightly larger due to smaller dataset size.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-09",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 3.1 Component 2",
+      "purpose": "Writing the Ablation 2 notebook section \u2014 TF-IDF weighting removed, code + visualisation + interpretation",
+      "prompt": "Write Ablation 2 for my task_3_1.ipynb: remove IDF weighting by setting use_idf=False. Include: markdown naming the component and its role (2-3 sentences citing Section 4.4 and Equation 3), code with all other settings unchanged, 2-panel figure saved to results/task_3_1_ablation2_tfidf.png, 5-7 sentence interpretation paragraph.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced the Ablation 2 section. The interpretation paragraph specifically explained why IDF removal causes a larger drop than bigram removal \u2014 common function words dominate the feature space without IDF down-weighting.",
+      "student_verification": "I ran the code and confirmed the 3.36 pp drop (97.95% \u2192 94.60%), larger than Ablation 1 as expected. I verified the per-fold numbers. I reviewed the interpretation and confirmed the reasoning about IDF amplifying rare deceptive vocabulary is consistent with Table 5 of the paper.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the final sentence in the interpretation explicitly stating that IDF is the 'more important of the two ablated components', which is a comparative conclusion I drew from running both experiments and is not in Claude's draft.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt_summary": "Which two components make the most informative ablations from BIGRAMS+_SVM?",
+      "why_most_useful": "This was the key decision point \u2014 I used Claude's suggestions as a candidate list and made the final choice myself based on paper grounding."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 3,
+      "prompt_summary": "Ablation 2: TF-IDF weighting removed \u2014 full section with interpretation",
+      "why_most_useful": "The interpretation of WHY IDF removal causes a larger drop than bigram removal required understanding the relationship between IDF and feature space noise."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt_summary": "Ablation 1: bigrams removed \u2014 full section with 5-7 sentence interpretation",
+      "why_most_useful": "Established the template structure (component role \u2192 code \u2192 visualisation \u2192 interpretation) used for both ablations."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt_summary": "Extend interpretation to compare our drop to paper's own Table 3 comparison",
+      "why_most_useful": "Connecting the ablation result back to the paper's Table 3 numbers was my own insight that significantly strengthened the interpretation."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 3,
+      "prompt_summary": "Comparative conclusion: IDF is more important than bigrams",
+      "why_most_useful": "This cross-ablation conclusion was my own contribution drawn from running both experiments \u2014 it demonstrates original analysis beyond just reporting numbers."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.1 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+}
