@@ -1,0 +1,136 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 1.2",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Identify and analyse at least 3 key assumptions the method relies on",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-06",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.2",
+      "purpose": "Brainstorming candidate assumptions before reading the paper carefully",
+      "prompt": "What assumptions does a TF-IDF + LinearSVC text classification pipeline make that could be violated in a real-world deception detection setting?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Claude listed general SVM assumptions (linear separability, i-i-d training data, bag-of-words ignores word order). I used these as a starting checklist, then went back to the paper to find which ones were actually embedded in Ott et al.'s specific design choices rather than just generic ML caveats.",
+      "student_verification": "I discarded 'linear separability' as too generic and instead identified the four assumptions that are specifically grounded in the paper's design decisions (balanced dataset, AMT proxy, stable n-gram signals, positive reviews only). Each one maps to a specific section of the paper.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 brainstorming only.",
+      "confidence_level": 4
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-06",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.2",
+      "purpose": "Checking whether the balanced dataset assumption is explicitly stated or just implicit in the paper",
+      "prompt": "Does Ott et al. 2011 explicitly state that the balanced 50/50 dataset is required for the NB simplification, or is it implicit? Which equations are affected?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude pointed out that the simplification from Equation 1 to Equation 2 in Section 3.2 cancels the class priors, which is only valid when P(deceptive)=P(truthful)=0.5. This gave me the exact equation reference to cite for Assumption 1.",
+      "student_verification": "I located Equations 1 and 2 in Section 3.2 and confirmed that the prior cancellation step requires equal priors. I also checked that the SVM itself does not apply class weights by default, which compounds the imbalance problem.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 reading comprehension only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-06",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.2",
+      "purpose": "Developing the LLM-generated reviews violation scenario for Assumption 3",
+      "prompt": "How would LLM-generated fake reviews (like GPT-4 written hotel reviews) violate the assumption that deceptive writing has learnable n-gram patterns different from truthful writing?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude explained that modern LLMs trained on vast corpora of genuine reviews would produce deceptive reviews whose n-gram distributions are statistically indistinguishable from truthful ones, collapsing the vocabulary gap that the SVM exploits. This became the violation scenario for Assumption 3.",
+      "student_verification": "I independently verified this reasoning by thinking through what Table 5 of the paper shows \u2014 spatial language like 'bathroom' and 'floor' as truthful signals \u2014 and confirmed that an LLM would naturally use such language, destroying the discriminative signal.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 reasoning and writing only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-06",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.2",
+      "purpose": "Structuring all four assumptions in the required format for the notebook",
+      "prompt": "Format these four assumptions for my Task 1.2 notebook: each needs an Assumption statement, Why the method needs it, Violation scenario, and Paper reference.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude helped format the four assumptions consistently using the required four-field structure. This saved time on formatting while I focused on verifying the content was accurate.",
+      "student_verification": "I reviewed each formatted assumption and corrected the violation scenario for Assumption 2 \u2014 Claude initially described a generic fake reviewer, but I changed it to specifically reference professional reputation management companies, which is more realistic and grounded in the paper's Section 6 limitations.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 markdown writing only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 5,
+      "date": "2026-03-06",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.2",
+      "purpose": "Checking whether Assumption 4 (positive reviews only) is strong enough to qualify as a key assumption",
+      "prompt": "Is 'the method only works on positive 5-star reviews' a strong enough assumption to include in Task 1.2, or is it just a dataset limitation?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude argued it qualifies as a genuine assumption because the model learns the joint signal of positive sentiment + deception, making it unable to separate the two \u2014 so it is a methodological constraint, not just a dataset choice. This convinced me to keep it as Assumption 4 with the Footnote 4 and Section 6 citations.",
+      "student_verification": "I re-read Section 6 of the paper and confirmed the authors themselves acknowledge this as a limitation, calling for future work on negative fake reviews. This justified including it as an assumption rather than just a dataset note.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 no code in this task.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt_summary": "Is the balanced dataset assumption explicit or implicit \u2014 which equations are affected?",
+      "why_most_useful": "Gave the exact equation-level grounding (Eq. 1\u21922) for Assumption 1, making it the strongest and most specific assumption in the notebook."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 3,
+      "prompt_summary": "How would LLM-generated fake reviews violate the learnable n-gram patterns assumption?",
+      "why_most_useful": "Produced the most original and contemporary violation scenario, connecting a 2011 paper to a 2024 threat model."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 4,
+      "prompt_summary": "Format four assumptions using the required four-field structure for the notebook",
+      "why_most_useful": "Saved significant formatting time while I focused on content accuracy and verification."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 1,
+      "prompt_summary": "What assumptions does TF-IDF + LinearSVC make that could be violated in deception detection?",
+      "why_most_useful": "Provided an initial candidate list that I then filtered down to four paper-specific assumptions."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 5,
+      "prompt_summary": "Is 'positive reviews only' a key assumption or just a dataset limitation?",
+      "why_most_useful": "Resolved my uncertainty about including Assumption 4 and provided the reasoning to justify it with Section 6 citations."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+  
+}
