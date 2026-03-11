@@ -1,0 +1,120 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 2.1",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Select and justify a toy dataset suitable for reproducing the BIGRAMS+_SVM method",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.1",
+      "purpose": "Identifying candidate datasets that are structurally parallel to the Ott et al. setup and require no internet access",
+      "prompt": "I need a toy dataset for reproducing Ott et al. 2011 BIGRAMS+_SVM. It must: be binary text classification, be embeddable in a notebook without downloading, have ~100-200 samples, be near-balanced. What are my best options?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude suggested SMS spam (UCI), movie review sentiment, and product review authenticity datasets. SMS spam was recommended as the closest structural parallel because both tasks involve classifying short text as genuine vs deceptive/unsolicited, and the UCI SMS corpus is well-known enough to embed a representative subset without copyright concerns.",
+      "student_verification": "I independently considered each option. Movie reviews are sentiment classification, not deception detection, so the parallel is weaker. Product reviews would require sourcing. SMS spam has the clearest structural analogy (spam \u2194 deceptive, ham \u2194 truthful) and I confirmed the UCI dataset is publicly available under CC BY 4.0.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 dataset selection decision only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.1",
+      "purpose": "Writing the justification and limitations comparison table for the dataset selection",
+      "prompt": "Write a justification section for choosing SMS spam as the toy dataset for Ott et al. reproduction, including a table comparing it to the paper's dataset on: domain, samples, balance, text length, difficulty, availability.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced the comparison table and justification text. I used this as the base for the Dataset Summary section in task_2_1.ipynb.",
+      "student_verification": "I verified all table entries \u2014 confirmed 149 samples in my embedded subset, ~12-13 avg word count, UCI availability. I also added the 'Source of deceptive class' row myself to highlight the AMT vs crowdsourced difference.",
+      "code_used_verbatim": false,
+      "student_modification": "Added 'Source of deceptive class' row to the comparison table; modified the difficulty description to more precisely explain WHY SMS spam is easier (explicit trigger words vs. subtle contextual patterns).",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.1",
+      "purpose": "Writing the preprocessing section that mirrors Ott et al. Section 4.3 exactly",
+      "prompt": "What preprocessing steps does Ott et al. 2011 apply to text before TF-IDF vectorisation? List each step with the paper section reference.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude listed: lowercasing (Section 4.3), no stemming (explicitly stated as 'unstemmed'), no stopword removal (pronouns carry deception signal), and L2 unit-length normalisation (Section 4.4). These became the four preprocessing steps in task_2_1.ipynb.",
+      "student_verification": "I confirmed each step against the paper text in Sections 4.3 and 4.4. The 'unstemmed' specification is explicitly stated in the paper; no stopword removal is implicit from the pronoun analysis in Section 5.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 markdown writing only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.1",
+      "purpose": "Building the dataset visualisation code \u2014 3-panel figure saved to results/",
+      "prompt": "Write Python code to generate a 3-panel dataset overview figure for my SMS spam dataset: Panel 1 pie chart (class distribution), Panel 2 word count histogram by class, Panel 3 top 8 class-distinctive words horizontal bar chart. Save to results/task_2_1_dataset_overview.png.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude wrote the full matplotlib/seaborn figure code including the Counter-based distinctive word extraction. This produced the 3-panel visualisation that is included in task_2_1.ipynb.",
+      "student_verification": "I ran the code, checked all three panels rendered correctly, and verified the distinctive word lists matched my own manual inspection of the dataset. I also confirmed the figure title and suptitle accurately described the content.",
+      "code_used_verbatim": true,
+      "student_modification": "Adjusted figure dimensions from (15,5) to (16,5) for better proportions. Added the paper reference and Assumption 1 connection in the explanation markdown cell below the figure \u2014 this analytical link was my own addition.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt_summary": "Candidate embeddable binary text classification datasets parallel to Ott et al. setup",
+      "why_most_useful": "Identified SMS spam as the best option and provided the structural reasoning that became the core of the justification section."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 4,
+      "prompt_summary": "Python code for 3-panel dataset overview figure saved to results/",
+      "why_most_useful": "Produced working visualisation code that saved significant implementation time; I verified output and added the analytical markdown."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt_summary": "What preprocessing steps does Ott et al. apply \u2014 with section references?",
+      "why_most_useful": "Mapped paper-specific preprocessing choices to TfidfVectorizer parameters, ensuring the reproduction is methodologically faithful."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt_summary": "Justification and comparison table for SMS spam vs Ott et al. dataset",
+      "why_most_useful": "Produced the comparison table base which I extended with the source-of-deceptive-class row and difficulty explanation."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 3,
+      "prompt_summary": "Paper preprocessing steps mapped to TfidfVectorizer parameters",
+      "why_most_useful": "Confirmed that lowercasing, no stemming, no stopword removal, and L2 norm all map directly to TfidfVectorizer defaults or named parameters."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.1 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+}
