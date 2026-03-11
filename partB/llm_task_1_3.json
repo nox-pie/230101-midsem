@@ -1,0 +1,119 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 1.3",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Identify what the paper claims to improve over, what the baseline limitation is, and a condition where the paper would NOT win",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.3",
+      "purpose": "Identifying the precise baseline the paper compares against in Table 3",
+      "prompt": "In Table 3 of Ott et al. 2011, which row is the baseline the paper is trying to beat and what specific limitation does it have?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude identified LIWC_SVM at 76.8% as the key baseline, since it was the state-of-the-art psycholinguistic approach from prior work (Newman et al. 2003, Mihalcea & Strapparava 2009). This helped me name the exact baseline and its limitation (universal cues, no domain-specific training data).",
+      "student_verification": "I looked up Table 3 and confirmed LIWC_SVM at 76.8%. I also read the referenced prior works section to confirm they used LIWC features without gold-standard deceptive data.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 no code in this task.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.3",
+      "purpose": "Understanding why LIWC finds opposite signals to what was expected \u2014 positive emotion higher in deceptive reviews",
+      "prompt": "Ott et al. 2011 find that LIWC features show MORE positive emotion in deceptive reviews, which is the OPPOSITE of what prior work predicted. Why does this happen and what does it mean for the baseline?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude explained that prior LIWC work was done on general deception tasks (lying in conversation), not fake positive reviews, so the domain shift reverses the signal. Fake hotel reviewers are writing enthusiastic promotional content, not nervously concealing information. This became the core of the 'limitation' section in Task 1.3.",
+      "student_verification": "I found the relevant passage in Section 5 where the paper discusses this counterintuitive LIWC finding and confirmed Claude's explanation matches the paper's interpretation.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 analysis and writing only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.3",
+      "purpose": "Constructing the cross-domain condition where BIGRAMS+_SVM would NOT outperform LIWC_SVM",
+      "prompt": "Give me a concrete scenario where BIGRAMS+_SVM from Ott et al. would fail to outperform the LIWC baseline, with reasoning grounded in the paper itself.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Claude suggested cross-domain transfer (hotel n-grams applied to restaurant reviews) as a case where LIWC's domain-independence becomes an advantage. I used this core idea but grounded it specifically in Table 5's feature list \u2014 noting that hotel-specific words like 'bathroom', 'hilton', and 'floor' would be meaningless in restaurant or product review domains.",
+      "student_verification": "I examined Table 5 of the paper and confirmed the top SVM features are hotel-specific vocabulary. I independently reasoned that retraining would be required for cross-domain use, making LIWC relatively more competitive in zero-shot transfer scenarios.",
+      "code_used_verbatim": false,
+      "student_modification": "Replaced Claude's generic cross-domain framing with a specific analysis of Table 5 hotel vocabulary to make the argument paper-grounded rather than abstract.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-07",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 1.3",
+      "purpose": "Drafting the full Task 1.3 notebook in structured markdown format",
+      "prompt": "Help me write Task 1.3 notebook with three sections: (1) baseline named and accuracy stated, (2) specific limitation of baseline, (3) condition where paper would not win \u2014 all with paper section citations.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced a clean three-section draft that matched the rubric structure. The numbered sections with paper citations saved time and ensured I addressed all required elements.",
+      "student_verification": "I reviewed all section citations (Section 4.2 for LIWC, Section 4.3 for BIGRAMS+, Section 5 for the counterintuitive finding, Table 5 for feature analysis, Section 6 for future work) and confirmed each was accurate.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 all markdown, no code in this task.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt_summary": "Why does LIWC find MORE positive emotion in deceptive reviews \u2014 opposite to prior predictions?",
+      "why_most_useful": "This was the most analytically rich question, producing the core argument for why the baseline has a fundamental limitation rather than just a quantitative gap."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 3,
+      "prompt_summary": "Concrete scenario where BIGRAMS+_SVM would NOT outperform the LIWC baseline",
+      "why_most_useful": "Required the most original thinking \u2014 Claude provided the starting idea (cross-domain) which I then grounded specifically in Table 5 vocabulary analysis."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 4,
+      "prompt_summary": "Draft Task 1.3 with three structured sections and paper citations",
+      "why_most_useful": "Produced the notebook scaffold efficiently, letting me focus on content verification rather than structure."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 1,
+      "prompt_summary": "Which row in Table 3 is the baseline and what specific limitation does it have?",
+      "why_most_useful": "Quickly located LIWC_SVM at 76.8% as the primary baseline with a precise limitation statement."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 3,
+      "prompt_summary": "Cross-domain scenario grounded in Table 5 hotel vocabulary",
+      "why_most_useful": "Provided the key insight that I modified \u2014 connecting the failure condition to the paper's own feature analysis."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.3 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+}
