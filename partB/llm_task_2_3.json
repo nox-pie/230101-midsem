@@ -1,0 +1,105 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 2.3",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Report results vs paper, explain gap honestly, produce visualisations, complete reproducibility checklist",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-08",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.3",
+      "purpose": "Interpreting the 97.95% vs 89.6% accuracy gap honestly without framing it as failure",
+      "prompt": "My BIGRAMS+_SVM reproduction gets 97.95% on SMS spam vs 89.6% in the paper on hotel reviews. How do I explain this gap honestly \u2014 it's HIGHER than the paper, not lower. What are the real reasons?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude identified three reasons: (1) SMS spam has explicit trigger words making classification lexically easier, (2) small dataset amplifies fold variance, (3) the gap actually validates the paper's argument that hotel review deception is genuinely hard. These became the three-reason gap commentary structure.",
+      "student_verification": "I independently verified each reason by checking the dataset visualisation in Task 2.1 (Panel 3 confirms stark vocabulary gap), the fold variance in Task 2.2 outputs (93.1%\u2013100%), and re-reading Section 1 of the paper which motivates the task's difficulty.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 analytical writing only.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-08",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.3",
+      "purpose": "Generating the 3-panel results visualisation \u2014 confusion matrix, per-fold CV, metric comparison",
+      "prompt": "Generate Python code for 3 separate figures saved to results/: (1) confusion matrix on held-out test set, (2) per-fold CV bar chart with reference lines for our mean and paper's 89.6%, (3) grouped bar chart comparing our metrics vs paper Table 3 values.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced all three figure code blocks. The reference line at 89.6% in Figure 2 and the side-by-side grouped bar in Figure 3 were particularly useful for making the comparison visually clear.",
+      "student_verification": "I ran all three code cells, inspected the outputs, and confirmed: (1) confusion matrix shows 15/15 correct for both classes, (2) per-fold bars with correct labels and reference lines, (3) metric comparison uses paper Table 3 values of 89.6/90.1/89.0/89.6 for acc/prec/rec/f1.",
+      "code_used_verbatim": true,
+      "student_modification": "Changed all three figures from a single 3-panel gridspec layout to 3 separate individual figures in separate code cells, each followed by its own explanation markdown. This was a structural improvement I made after the initial draft to improve notebook readability and satisfy the one-code-cell-per-visualisation requirement.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-08",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.3",
+      "purpose": "Building the reproducibility checklist code cell that prints all five criteria",
+      "prompt": "Write a Python code cell that prints a reproducibility checklist confirming: seeds set, requirements.txt documented, notebooks run top-to-bottom, no manual dataset steps, hyperparameters in one place. Print actual version numbers.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude wrote the checklist cell that imports version numbers directly from installed packages and prints them alongside each criterion. This ensures the checklist is dynamic rather than hardcoded.",
+      "student_verification": "I ran the cell and confirmed all five criteria were met. I also verified the printed hyperparameter values match the constants declared in the hyperparameter cell at the top of the notebook.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the RESULTS_DIR and TEST_SIZE constants to the printed hyperparameter list \u2014 Claude's draft only printed the 5 core ones (NGRAM_RANGE, NORM, SVM_C, N_FOLDS, RANDOM_SEED). I wanted all 9 constants to appear so the checklist is fully self-documenting.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt_summary": "How to explain honestly why reproduction accuracy is HIGHER than the paper's \u2014 three reasons",
+      "why_most_useful": "This was the analytically critical question \u2014 framing a higher-than-paper result as an expected and explainable observation rather than a failure or an inflated result."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt_summary": "3 separate figure code blocks for confusion matrix, per-fold CV, and metric comparison",
+      "why_most_useful": "Produced all visualisation code; my structural modification (separating into individual cells) significantly improved the notebook organisation."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt_summary": "Reproducibility checklist code cell with dynamic version number printing",
+      "why_most_useful": "Made the checklist self-verifying by printing actual installed versions rather than hardcoded strings."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 1,
+      "prompt_summary": "Three-reason gap analysis: trigger words, dataset size, task difficulty validation",
+      "why_most_useful": "Reason 3 (gap validates the paper's core claim) was the most insightful \u2014 I would not have framed it this way without this interaction."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 2,
+      "prompt_summary": "Reference line at paper's 89.6% in per-fold CV bar chart",
+      "why_most_useful": "The visual reference line made the comparison between reproduction and paper immediately legible without needing to read the text."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.3 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+}
