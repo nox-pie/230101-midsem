@@ -1,0 +1,105 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 3.2",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Construct a failure scenario connected to a specific Task 1.2 assumption",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-09",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 3.2",
+      "purpose": "Identifying the strongest failure mode that closes a loop with Task 1.2 assumptions",
+      "prompt": "Which of my four Task 1.2 assumptions would produce the most dramatic and demonstrable failure if violated in an experiment? I want something that gives a clear, measurable performance collapse.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Claude suggested Assumption 1 (balanced dataset) because class imbalance is easy to construct artificially, produces a measurable and visually dramatic failure, and connects directly to a specific design choice in the paper (prior cancellation in Eq. 1\u21922). This confirmed my own inclination.",
+      "student_verification": "I independently verified this was the best choice by considering all four assumptions: Assumption 2 (AMT proxy) cannot be tested without new data collection, Assumption 3 (stable n-grams) would require LLM-generated text, Assumption 4 (positive only) would require negative fake reviews. Assumption 1 was the only one I could test with code alone on the existing dataset.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 the failure mode selection was my own decision.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-09",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 3.2",
+      "purpose": "Building the full failure mode notebook \u2014 scenario description, imbalanced dataset construction, experiment, visualisation, explanation",
+      "prompt": "Build the full Task 3.2 failure mode notebook. Scenario: 5.4% spam (8 messages), 94.6% ham (141 messages). Show that accuracy stays high (~94%) but F1 collapses to 0%. Explain why, link to Assumption 1 and Section 3.2. End with one-sentence fix using class_weight='balanced'.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced the complete notebook structure: scenario description citing Assumption 1 and Section 3.2, dataset construction code with replace=True for ham oversampling, cross_validate with four metrics, 2-panel visualisation (metric comparison + confusion matrix), and the failure explanation paragraph.",
+      "student_verification": "I ran all code cells and confirmed: (1) imbalanced CV gives F1=0%, recall=0% across all 5 folds while accuracy stays at 94.6%, (2) confusion matrix shows all predictions as ham (2 spam misclassified as ham, 0 spam correctly identified), (3) the majority-class baseline of 94.6% matches the imbalanced dataset ratio.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the 'majority-class baseline accuracy' print in the dataset construction cell \u2014 I wanted this number explicitly stated so the reader understands that 94.6% accuracy is meaningless. Also extended the explanation paragraph to add the connection to Section 6 of the paper (authors acknowledge deployment on real platforms where class priors are unknown).",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-09",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 3.2",
+      "purpose": "Verifying that the suggested fix (class_weight='balanced') is technically correct and implementable",
+      "prompt": "Is class_weight='balanced' in LinearSVC the correct fix for the class imbalance failure? How does it work mechanically?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude confirmed that class_weight='balanced' scales hinge-loss penalties inversely proportional to class frequency, effectively giving each spam example 17.6x the weight of a ham example in this dataset, preventing the majority-class collapse. This let me write the fix sentence confidently.",
+      "student_verification": "I verified in scikit-learn documentation that LinearSVC supports class_weight='balanced' and that the weighting formula is n_samples / (n_classes * np.bincount(y)), which for 8 spam / 141 ham gives the expected ratio.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 verification and one-sentence fix writing only.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt_summary": "Build full Task 3.2 notebook: 5.4% spam scenario, F1 collapse demonstration, Assumption 1 link, fix",
+      "why_most_useful": "Produced the complete failure mode notebook including the dramatic F1=0% result while accuracy stays at 94.6% \u2014 the empirical heart of Task 3.2."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt_summary": "Which Task 1.2 assumption produces the most dramatic and measurable failure?",
+      "why_most_useful": "Confirmed Assumption 1 was the right choice and provided the reasoning that became the opening of the scenario description."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt_summary": "Is class_weight='balanced' the correct fix and how does it work mechanically?",
+      "why_most_useful": "Verified the technical correctness of the suggested modification before committing to it in the notebook."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt_summary": "Majority-class baseline calculation and why 94.6% accuracy is misleading",
+      "why_most_useful": "The majority-class baseline concept was key to explaining why accuracy is a deceptive metric under imbalance \u2014 directly connecting to the paper's evaluation methodology critique."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 2,
+      "prompt_summary": "Section 6 connection: authors acknowledge unknown class priors in real deployment",
+      "why_most_useful": "Grounding the failure mode in the paper's own Section 6 acknowledgement made the explanation substantially stronger."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 3.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+}
