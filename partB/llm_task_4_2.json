@@ -1,0 +1,58 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 4.2",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Create all 10 LLM usage disclosure JSON files in the required format with Part B additional fields",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-11",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 4.2",
+      "purpose": "Understanding the additional Part B fields required in every LLM JSON file",
+      "prompt": "What additional fields does Part B require in each LLM interaction entry compared to Part A? What are the exact field names and allowed values?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude clarified that three new fields are required: task_tag (string indicating the task), code_used_verbatim (boolean), and student_modification (required when code_used_verbatim=true). Also confirmed that top_5_prompts must be drawn from interactions in that specific file only.",
+      "student_verification": "I re-read the Task 4.2 rubric carefully and confirmed Claude's interpretation was correct. I also noted that files for tasks with fewer than 5 interactions should include all of them rather than padding to exactly 5.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A \u2014 clarification only.",
+      "confidence_level": 5
+    },
+
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt_summary": "Clarify the three additional Part B fields: task_tag, code_used_verbatim, student_modification",
+      "why_most_useful": "Ensured I understood the exact field requirements before generating any files, preventing structural errors."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt_summary": "Confirm top_5_prompts must be drawn from interactions in the same file only",
+      "why_most_useful": "Clarified a potential ambiguity in the rubric that would have caused structural errors if misunderstood."
+    },
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 4.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+}
