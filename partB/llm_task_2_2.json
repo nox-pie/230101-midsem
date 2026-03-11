@@ -1,0 +1,106 @@
+{
+  "student_metadata": {
+    "name": "Prashant Kumar",
+    "roll_number": "230101",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 2.2",
+    "submission_date": "2026-03-11"
+  },
+  "llm_tools_used": [
+    {
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "provider": "Anthropic"
+    }
+  ],
+  "task_description": "Implement BIGRAMS+_SVM with code-to-paper annotations in every code cell",
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-08",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.2",
+      "purpose": "Mapping TfidfVectorizer parameters exactly to the paper's Section 4.3 and 4.4 specifications",
+      "prompt": "Map every TfidfVectorizer parameter to its corresponding specification in Ott et al. 2011: ngram_range, norm, sublinear_tf, lowercase, use_idf. Which paper section and equation justifies each?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude produced a parameter-to-section mapping: ngram_range=(1,2) \u2192 Section 4.3 BIGRAMS+, norm='l2' \u2192 Section 4.4 unit-length normalisation, sublinear_tf=True \u2192 dampening high frequencies, lowercase=True \u2192 Section 4.3 'lowercased features'. This became the inline comment annotation in the vectorisation code cell.",
+      "student_verification": "I verified each mapping against the paper. Specifically checked that Section 4.4 uses the phrase 'unit-length normalized' and that Section 4.3 states features are 'lowercased and unstemmed'.",
+      "code_used_verbatim": true,
+      "student_modification": "Added MAX_ITER=2000 parameter to LinearSVC to prevent convergence warnings on the small dataset. Also renamed variables from generic names to paper-grounded constants (NGRAM_RANGE, NORM, SVM_C) to match the hyperparameter declaration cell.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-08",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.2",
+      "purpose": "Writing the full BIGRAMS+_SVM notebook with code-to-paper annotation structure",
+      "prompt": "Build a complete Task 2.2 notebook implementing BIGRAMS+_SVM. Every code cell must be immediately followed by a markdown cell explaining what the code does and citing the exact paper section. Include: dataset, vectorisation, LinearSVC, 5-fold CV, feature weight analysis.",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude generated the full 20-cell notebook structure with alternating code and markdown cells. The annotation format (What the code does + Paper reference) was established here and maintained consistently throughout.",
+      "student_verification": "I reviewed every annotation and corrected two inaccuracies: the feature weight analysis markdown incorrectly cited Section 4 instead of Section 5 Table 5, and the CV split description did not mention that the paper splits by hotel rather than randomly. I added a note explaining why random splitting was used for SMS (no hotel-equivalent grouping).",
+      "code_used_verbatim": true,
+      "student_modification": "Corrected two section citations (Section 4 \u2192 Section 5 for feature weights). Added explanation of why StratifiedKFold by message (not hotel) is appropriate for SMS spam. Added the accuracy vs paper comparison print at the end of the CV cell.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-08",
+      "tool_name": "Claude",
+      "model": "Claude Sonnet 4.6",
+      "task_tag": "Task 2.2",
+      "purpose": "Understanding how to interpret feature weights from LinearSVC as analogous to Table 5 in the paper",
+      "prompt": "How do I extract and display the top positive and negative feature weights from LinearSVC in sklearn, and how does this parallel Table 5 of Ott et al. 2011?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Claude showed that clf.coef_[0] gives the weight vector and argsort can extract top features. More importantly, Claude explained that high positive weights correspond to spam/deceptive signal and negative weights to ham/truthful signal, directly paralleling the deceptive vs truthful feature weights in Table 5.",
+      "student_verification": "I ran the feature extraction and confirmed that 'free', 'prize', 'win', 'claim' appeared as top spam features, which matches the expected vocabulary from the dataset visualisation in Task 2.1. I verified the code produced sensible output before including it.",
+      "code_used_verbatim": true,
+      "student_modification": "Changed display to show top 10 per class (instead of 5) to give richer output. Added the comparative note in the markdown cell connecting our top features to the spatial/imaginative language distinction in Table 5.",
+      "confidence_level": 5
+    }
+  ],
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt_summary": "Build full Task 2.2 notebook with alternating code and annotation markdown cells",
+      "why_most_useful": "Established the annotation structure for the entire notebook \u2014 the most time-consuming aspect of Task 2.2 which is graded primarily on annotation quality."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt_summary": "Map every TfidfVectorizer parameter to its paper section and equation",
+      "why_most_useful": "Produced the precise parameter-to-section mapping that makes the code annotations academically rigorous."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt_summary": "Extract LinearSVC feature weights and parallel to Table 5 of Ott et al.",
+      "why_most_useful": "Connected the sklearn implementation detail to the paper's most cited result (feature weight analysis), strengthening the reproduction's conceptual link to the paper."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt_summary": "Correct section citations and add hotel-vs-random CV split explanation",
+      "why_most_useful": "My own correction caught two inaccuracies in the generated annotations \u2014 important because Task 2.2 is graded on annotation quality."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 1,
+      "prompt_summary": "TfidfVectorizer parameter mapping with inline comment format",
+      "why_most_useful": "Made every hyperparameter declaration self-documenting with paper references, satisfying the reproducibility checklist requirements."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Prashant Kumar",
+    "date": "2026-03-11"
+  }
+
+}
